@@ -6,22 +6,52 @@ import math
 from collections import defaultdict
 
 
+def triangle_series():
+    n = 1
+    s = 0
+    while True:
+        s += n
+        n += 1
+        yield s
+
+
+def divisors(n):
+    for x in xrange(1, int(math.sqrt(n))+1):
+        if n % x == 0:
+            yield x
+            yield n / x
+
+
+def count(series):
+    n = 0
+    for _ in series:
+        n += 1
+    return n
+
+
 def is_prime(n):
     " Is n prime? "
-    if n < 1:
+    if n < 2:
         return False
-    if n < 3:
+    if n == 2:
         return True
-    for k in xrange(2, n):
-        if n % k == 0:
+    for x in xrange(2, int(math.sqrt(n))+1):
+        if n % x == 0:
             return False
     return True
 
 
-def primes_naive(n, m):
-    " Yields primes in range [n, m). "
-    for x in xrange(n, m):
+def primes_naive(m, known=[]):
+    " Yields primes up to m. "
+    n = 1
+    for p in known:
+        n = p
+        if n > m:
+            return
+        yield n
+    for x in xrange(n+1, m):
         if is_prime(x):
+            known.append(x)
             yield x
 
 
@@ -29,7 +59,7 @@ def prime_factors(n):
     " Returns prime factors of n "
     facs = []
     while not is_prime(n):
-        for p in primes_naive(2, n):
+        for p in primes_naive(n):
             if n % p == 0:
                 facs.append(p)
                 n = n / p
@@ -123,3 +153,5 @@ class Grid(object):
         " Take a left-diagonal slice of n elements starting at (x,y). "
         idx = [(x-i, y+i) for i in range(n) if self.is_in_grid(x+i, y+i)]
         return [self.array[x][y] for x, y in idx]
+
+

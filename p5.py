@@ -1,4 +1,5 @@
 from collections import Counter
+from time import time
 
 from euler import prime_factors
 
@@ -18,10 +19,12 @@ def multiply_factors(f):
 
 
 if __name__ == '__main__':
-    n = 20
+    start = time()
+    n = 100
     facs = {}
 
-    for i in xrange(1, n+1):
+    for i in xrange(2, n+1):
         facs = join_factors(facs, Counter(prime_factors(i)))
 
     print(multiply_factors(facs))
+    print('elapsed: %f seconds' % (time() - start))

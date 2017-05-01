@@ -10,3 +10,4 @@ def find_pyth():
 
 if __name__ == '__main__':
     print(product(find_pyth()))
+    print('elapsed: %f seconds' % (time() - start))
