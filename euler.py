@@ -94,6 +94,9 @@ class Grid(object):
             for i in range(self.width):
                 self.transposed[i].append(vals[i])
 
+    def __getitem__(self, val):
+        return self.array.__getitem__(val)
+
     def is_in_grid(self, x, y):
         return (0 <= x < self.width) and (0 <= y < self.height)
 
