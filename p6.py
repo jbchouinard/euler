@@ -1,3 +1,3 @@
-n = 100
-
-print(-sum(map(lambda x: x**2, range(n+1))) + sum(range(n+1))**2)
+if __name__ == '__main__':
+    n = 100
+    print(-sum(map(lambda x: x**2, range(n+1))) + sum(range(n+1))**2)

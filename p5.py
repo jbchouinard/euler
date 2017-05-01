@@ -1,6 +1,6 @@
 from collections import Counter
 
-from p3 import *
+from euler import prime_factors
 
 
 def join_factors(f1, f2):
