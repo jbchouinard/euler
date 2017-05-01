@@ -1,6 +1,6 @@
 from collections import Counter
 
-from p4 import *
+from p3 import *
 
 
 def join_factors(f1, f2):

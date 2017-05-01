@@ -1,6 +1,3 @@
-from p2 import *
-
-
 def is_prime(n):
     " Is n prime? "
     if n < 1:
