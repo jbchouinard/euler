@@ -2,6 +2,7 @@
 Functions for solving Project Euler problems.
 https://projecteuler.net
 """
+import math
 from collections import defaultdict
 
 
@@ -24,6 +25,18 @@ def primes_naive(n, m):
             yield x
 
 
+def prime_factors(n):
+    " Returns prime factors of n "
+    facs = []
+    while not is_prime(n):
+        for p in primes_naive(2, n):
+            if n % p == 0:
+                facs.append(p)
+                n = n / p
+                break
+    return facs + [n]
+
+
 def primes_sieve(n):
     " List primes in range up to n. "
     candidates = defaultdict(lambda: 1)
@@ -32,18 +45,6 @@ def primes_sieve(n):
             for k in range(2*p, n, p):
                 candidates[k] = 0
     return sorted(p for p in candidates if candidates[p])
-
-
-def prime_factors(n):
-    " Returns prime factors of n "
-    facs = []
-    while not is_prime(n):
-        for p in primes_sieve(n):
-            if n % p == 0:
-                facs.append(p)
-                n = n / p
-                break
-    return facs + [n]
 
 
 def fib(n, x=1, y=2):
