@@ -155,6 +155,32 @@ class Grid(object):
         return [self.array[x][y] for x, y in idx]
 
 
+class NumberTriangle(object):
+
+    def __init__(self, triangle, rowsep='\n', colsep=' '):
+        " Create triangle of numbers from string representation. "
+        self.triangle = []
+        n = 1
+        for line in triangle.split(rowsep):
+            vals = map(int, line.split(colsep))
+            assert len(vals) == n
+            n += 1
+            self.triangle.append(vals)
+
+    def __getitem__(self, i):
+        return self.triangle[i]
+
+    def left_parent(self, row, i):
+        if i == 0:
+            return 0
+        return self.triangle[row-1][i-1]
+
+    def right_parent(self, row, i):
+        if i == (len(self.triangle[row])-1):
+            return 0
+        return self.triangle[row-1][i]
+
+
 def binomial_permutations(n, m):
     """
     Number of unique permutations of (n+m) coins such that there are
